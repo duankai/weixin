@@ -1,0 +1,51 @@
+<style lang="less">
+  .add_link {
+    color: rgb(140, 243, 72);
+    font-size: large;
+    font-weight: bold;
+    background-color: bisque;
+  }
+</style>
+
+<template>
+  <view>
+    <i-cell-group>
+    <!-- <i-cell title="只显示箭头" is-link></i-cell> -->
+      <i-cell title="张飞" is-link url="./user_detail?name=张飞&pn=13150022301&group=数据1"></i-cell>
+      <i-cell title="关羽" is-link url="./user_detail?name=关羽&pn=13150022302&group=数据2"></i-cell>
+      <i-cell title="赵云" is-link url="./user_detail?name=赵云&pn=13150022303&group=数据1"></i-cell>
+      <i-cell title="黄忠" is-link url="./user_detail?name=黄忠&pn=13150022304&group=数据2"></i-cell>
+      <i-cell title="马超" is-link url="./user_detail?name=马超&pn=13150022305&group=数据"></i-cell>
+      
+      <!-- <i-button title="add" url="./user_detail"></i-button> -->
+    <!-- <i-cell title="只有 footer 点击有效" is-link url="/pages/dashboard/index" only-tap-footer></i-cell>
+    <i-cell title="开关">
+        <switch slot="footer" checked />
+    </i-cell> -->
+    </i-cell-group>
+    <i-button @tap="addUser" type="info" >新增用户</i-button>
+    <!-- <i-cell-group>
+    <i-cell title="新增" class="add_link" is-link url="./user_detail?name=add"></i-cell>
+    </i-cell-group> -->
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class extends wepy.page {
+  config = {
+    usingComponents: {
+      'i-cell-group': '../resources/ui/cell-group/index',
+      'i-button': '../resources/ui/button/index',
+      'i-cell': '../resources/ui/cell/index',
+      'i-toast': '../resources/ui/toast/index'
+    },
+    navigationBarTitleText: '用户列表'
+  }
+  methods = {
+    addUser () {
+      wepy.navigateTo({ url: './user_detail?name=add' })
+    }
+  }
+}
+</script>

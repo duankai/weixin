@@ -1,0 +1,100 @@
+<style lang="less">
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+</style>
+<template>
+  <view>
+    <!-- <navigator url="./view_all">用户列表</navigator> -->
+    <i-tab-bar current="{{ current }}" bindchange="handleChange" fixed="true">
+      <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="Home"></i-tab-bar-item>
+      <i-tab-bar-item key="userList" icon="group" current-icon="group_fill" title="用户列表"></i-tab-bar-item>
+      <i-tab-bar-item key="remind" icon="remind" current-icon="remind_fill" count="3" title="Notice"></i-tab-bar-item>
+      <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" dot title="My"></i-tab-bar-item>
+    </i-tab-bar>
+    <i-toast id="toast" />
+  </view>
+    <!--  -->
+  <!--  -->
+
+</template>
+
+<script>
+  const { $Toast } = require('../resources/ui/base/index')
+  import wepy from 'wepy'
+  import moduleA from 'module-a' // aliasFields ignore module example
+  console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: 'smart_space',
+      usingComponents: {
+        'i-modal': '../resources/ui/modal/index',
+        'i-tab-bar': '../resources/ui/tab-bar/index',
+        'i-tab-bar-item': '../resources/ui/tab-bar-item/index',
+        'i-toast': '../resources/ui/toast/index'
+      }
+    }
+    data = {
+      current: ''
+    }
+
+    onLoad () {
+      console.log('adsfasdf')
+      wepy.getSetting({
+        success (res) {
+          console.log('12323322231321==')
+          if (res.authSetting['scope.userInfo']) {
+            wepy.getUserInfo({
+              success (res) {
+                console.log('success==')
+                console.log(res.userInfo)
+              }
+            })
+          } else {
+            console.log('no promise')
+            wepy.redirectTo({ url: './auth' })
+          }
+        }
+      })
+    }
+
+    methods = {
+      handleChange ({ detail }) {
+        $Toast({
+          content: '加载中',
+          type: 'loading'
+        })
+        this.current = detail.key
+        if (this.current === 'userList') {
+          wepy.navigateTo({ url: './view_all' })
+        }
+      },
+
+      bindgetuserinfo (e) {
+        if (e.detail.userInfo) {
+          console.log('login')
+        } else {
+          console.log(333, '执行到这里，说明拒绝了授权')
+          wepy.showToast({
+            title: '为了您更好的体验,请先同意授权',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    }
+  }
+</script>

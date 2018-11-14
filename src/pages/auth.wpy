@@ -1,0 +1,59 @@
+<style lang="less">
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+</style>
+<template>
+  <view>
+    <button open-type="getUserInfo" bindgetuserinfo="bindgetuserinfo">点击授权</button>
+  </view>
+    <!--  -->
+  <!--  -->
+
+</template>
+
+<script>
+  import wepy from 'wepy'
+
+  export default class Index extends wepy.page {
+    config = {
+      navigationBarTitleText: '请求授权',
+      usingComponents: {
+        'i-modal': '../resources/ui/modal/index',
+        'i-tab-bar': '../resources/ui/tab-bar/index',
+        'i-tab-bar-item': '../resources/ui/tab-bar-item/index',
+        'i-toast': '../resources/ui/toast/index'
+      }
+    }
+
+    onLoad () {
+    }
+
+    methods = {
+      bindgetuserinfo (e) {
+        if (e.detail.userInfo) {
+          console.log('login')
+        } else {
+          console.log(333, '执行到这里，说明拒绝了授权')
+          wepy.showToast({
+            title: '为了您更好的体验,请先同意授权',
+            icon: 'none',
+            duration: 2000
+          })
+        }
+      }
+    }
+  }
+</script>
