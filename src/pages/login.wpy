@@ -17,7 +17,11 @@
 </style>
 <template>
   <view>
-    <i-button type="info" open-type="getUserInfo" bindgetuserinfo="bindgetuserinfo">点击授权</i-button>
+    <i-panel title="用户详细信息">
+      <i-input value="{{ value1 }}" type="number" title="工号" placeholder="请输入工号" />
+      <i-input value="{{ value2 }}" type="password" title="密码" placeholder="请输入密码" maxlength="50" />
+      <i-button @tap="login" type="info">提交</i-button>
+    </i-panel>
   </view>
     <!--  -->
   <!--  -->
@@ -29,24 +33,26 @@
 
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: '请求授权',
+      navigationBarTitleText: '用户登录',
       usingComponents: {
-        'i-modal': '../resources/ui/modal/index',
-        'i-tab-bar': '../resources/ui/tab-bar/index',
-        'i-tab-bar-item': '../resources/ui/tab-bar-item/index',
-        'i-toast': '../resources/ui/toast/index',
+        'i-input': '../resources/ui/input/index',
+        'i-panel': '../resources/ui/panel/index',
         'i-button': '../resources/ui/button/index'
       }
     }
-
+    data = {
+      value1: '',
+      value2: ''
+    }
     onLoad () {
     }
 
     methods = {
-      bindgetuserinfo (e) {
+      login (e) {
+        wepy.redirectTo({url: './index'})
         if (e.detail.userInfo) {
           console.log('login')
-          wepy.redirectTo({url: './login'})
+          wepy.redirectTo({url: './index'})
         } else {
           console.log(333, '执行到这里，说明拒绝了授权')
           wepy.showToast({

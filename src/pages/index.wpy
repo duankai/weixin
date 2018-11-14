@@ -39,7 +39,7 @@
 
   export default class Index extends wepy.page {
     config = {
-      navigationBarTitleText: 'smart_space',
+      navigationBarTitleText: '会议室预约系统',
       usingComponents: {
         'i-modal': '../resources/ui/modal/index',
         'i-tab-bar': '../resources/ui/tab-bar/index',
