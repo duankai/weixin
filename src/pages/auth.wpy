@@ -40,6 +40,7 @@
     }
 
     onLoad () {
+      wepy.showToast
     }
 
     methods = {

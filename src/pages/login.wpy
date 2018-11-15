@@ -30,6 +30,7 @@
 
 <script>
   import wepy from 'wepy'
+  import api from '../utils/api'
 
   export default class Index extends wepy.page {
     config = {
@@ -52,9 +53,13 @@
         wepy.redirectTo({url: './index'})
         if (e.detail.userInfo) {
           console.log('login')
-          wepy.redirectTo({url: './index'})
+          let rs = async api.login(data)
+          if (rs) {
+            wepy.redirectTo({url: './index'})
+          } else {
+            return
+          }
         } else {
-          console.log(333, '执行到这里，说明拒绝了授权')
           wepy.showToast({
             title: '为了您更好的体验,请先同意授权',
             icon: 'none',
