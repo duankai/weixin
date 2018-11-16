@@ -52,14 +52,11 @@
     }
 
     onLoad () {
-      console.log('adsfasdf')
       wepy.getSetting({
         success (res) {
-          console.log('12323322231321==')
           if (res.authSetting['scope.userInfo']) {
             wepy.getUserInfo({
               success (res) {
-                console.log('success==')
                 console.log(res.userInfo)
               }
             })
@@ -80,19 +77,6 @@
         this.current = detail.key
         if (this.current === 'userList') {
           wepy.navigateTo({ url: './view_all' })
-        }
-      },
-
-      bindgetuserinfo (e) {
-        if (e.detail.userInfo) {
-          console.log('login')
-        } else {
-          console.log(333, '执行到这里，说明拒绝了授权')
-          wepy.showToast({
-            title: '为了您更好的体验,请先同意授权',
-            icon: 'none',
-            duration: 2000
-          })
         }
       }
     }

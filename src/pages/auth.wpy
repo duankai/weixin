@@ -40,21 +40,20 @@
     }
 
     onLoad () {
-      wepy.showToast
     }
 
     methods = {
       bindgetuserinfo (e) {
         if (e.detail.userInfo) {
-          console.log('login')
+          console.log('need login')
           wepy.redirectTo({url: './login'})
         } else {
-          console.log(333, '执行到这里，说明拒绝了授权')
           wepy.showToast({
             title: '为了您更好的体验,请先同意授权',
             icon: 'none',
             duration: 2000
           })
+          wepy.redirectTo({url: './auth'})
         }
       }
     }
