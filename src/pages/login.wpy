@@ -49,9 +49,11 @@
     }
 
     methods = {
-      login () {
-        console.log('login__*!(@#((!@#')
-        let rs = api.login(this.data)
+      async login () {
+        console.log('loginFFGFGFFFFFFFF')
+        let rs1 = await api.register(this.data)
+        let rs = await api.login(this.data)
+        console.log('--=====!!!!!!!!!', rs1)
         if (rs) {
           console.log('login!!!!!!!!!')
           console.log(rs)

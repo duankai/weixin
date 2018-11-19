@@ -9,7 +9,7 @@
 	},
 	"compileType": "miniprogram",
 	"appid": "wxe01d61545564928e",
-	"projectname": "4324234",
-	"miniprogramRoot": "./dist",
+	"projectname": "weixin",
+	"miniprogramRoot": "dist/",
 	"condition": {}
 }
