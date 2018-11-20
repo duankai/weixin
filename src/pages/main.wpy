@@ -1,0 +1,34 @@
+<style lang="less">
+  .userinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .userinfo-avatar {
+    width: 80rpx;
+    height: 80rpx;
+    border-radius: 50%;
+  }
+
+  .userinfo-nickname {
+    color: #aaa;
+  }
+</style>
+<template>
+  <view>
+    <p>hello main page</p>
+    <i-tab-bar current="{{ current }}" bindchange="handleChange" fixed="true">
+      <i-tab-bar-item key="homepage" icon="homepage" current-icon="homepage_fill" title="Home"></i-tab-bar-item>
+      <i-tab-bar-item key="userList" icon="group" current-icon="group_fill" title="用户列表"></i-tab-bar-item>
+      <i-tab-bar-item key="remind" icon="remind" current-icon="remind_fill" count="3" title="Notice"></i-tab-bar-item>
+      <i-tab-bar-item key="mine" icon="mine" current-icon="mine_fill" dot title="My"></i-tab-bar-item>
+    </i-tab-bar>
+    <i-toast id="toast" />
+  </view>
+</template>
+
+<script>
+import wepy from 'wepy'
+export default class extends wepy.page {}
+</script>

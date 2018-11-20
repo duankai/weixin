@@ -34,9 +34,7 @@
 <script>
   const { $Toast } = require('../resources/ui/base/index')
   import wepy from 'wepy'
-  import moduleA from 'module-a' // aliasFields ignore module example
-  console.log('moduleA ignored: ', moduleA) // => moduleA ignored: {}
-
+  import api from '../utils/api'
   export default class Index extends wepy.page {
     config = {
       navigationBarTitleText: '会议室预约系统',
@@ -48,27 +46,30 @@
       }
     }
     data = {
-      current: ''
     }
 
     onLoad () {
-      wepy.getSetting({
-        success (res) {
-          if (res.authSetting['scope.userInfo']) {
-            wepy.getUserInfo({
-              success (res) {
-                console.log(res.userInfo)
-              }
-            })
-          } else {
-            console.log('no promise')
-            wepy.redirectTo({ url: './auth' })
-          }
-        }
-      })
+      this.methods.register()
     }
 
     methods = {
+      async isRegiste (sourceCode) {
+        let promiseObject = await api.register({'source_code': sourceCode})
+        if (promiseObject.data.status === false) {
+          wepy.redirectTo({url: './login'})
+        } else {
+          wepy.redirectTo({url: './main'})
+        }
+        console.log('promiseObject', promiseObject)
+      },
+      register () {
+        wepy.login({
+          success: (res) => {
+            console.log('21h2l14jn1', res.code)
+            this.isRegiste(res.code)
+          }
+        })
+      },
       handleChange ({ detail }) {
         $Toast({
           content: '加载中',

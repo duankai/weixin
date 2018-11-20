@@ -50,17 +50,14 @@
 
     methods = {
       async login () {
-        console.log('loginFFGFGFFFFFFFF')
-        let rs1 = await api.register(this.data)
         let rs = await api.login(this.data)
-        console.log('--=====!!!!!!!!!', rs1)
-        if (rs) {
+        console.log(rs)
+        if (rs.data.data.status === 1) {
           console.log('login!!!!!!!!!')
           console.log(rs)
-          wepy.redirectTo({url: './index'})
+          wepy.redirectTo({ url: './main' })
         } else {
-          console.log('not login')
-          wepy.redirectTo({url: './login'})
+          console.log('not login, please login')
         }
       }
     }
